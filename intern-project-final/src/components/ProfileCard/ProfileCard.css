@@ -1,0 +1,155 @@
+/* ProfileCard.css */
+.profile-card {
+  max-width: 350px;
+  margin: 0 auto;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #121212;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #4b830d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.profile-initials {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.profile-name {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.profile-role {
+  font-size: 1rem;
+  color: #a3a3a3;
+  margin-bottom: 1rem;
+}
+
+.profile-school {
+  font-size: 1rem;
+  margin: 0.25rem 0;
+}
+
+.profile-degree {
+  font-size: 0.9rem;
+  color: #a3a3a3;
+  margin-top: 0;
+}
+
+.profile-sections {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section-toggle {
+  color: #1e1e1e;
+  background-color: #ffffff;
+  border: 1px solid black;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.section-toggle:hover {
+  background-color: #c5e1a5;
+}
+
+.section-content {
+  border: 1px solid black;
+  background-color: white;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.section-content li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #2c2c2c;
+}
+
+.section-content li:last-child {
+  border-bottom: none;
+}
+
+/* For light green variant (as originally requested) */
+.profile-card.light-green {
+  background-color: white;
+  color: #333;
+}
+
+.profile-card.light-green .profile-header {
+  background: linear-gradient(to right, #c5e1a5, #8bc34a);
+}
+
+.profile-card.light-green .profile-avatar {
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.profile-card.light-green .profile-initials {
+  color: #4b830d;
+}
+
+.profile-card.light-green .profile-name {
+  color: #3e5f22;
+}
+
+.profile-card.light-green .profile-role {
+  color: #4b830d;
+}
+
+.profile-card.light-green .section-toggle {
+  background-color: #f1f8e9;
+  color: #558b2f;
+}
+
+.profile-card.light-green .section-toggle:hover {
+  background-color: #dcedc8;
+}
+
+.profile-card.light-green .section-content {
+  background-color: #f9fbe7;
+}
+
+.profile-card.light-green .section-content li {
+  border-bottom: 1px solid #dcedc8;
+}

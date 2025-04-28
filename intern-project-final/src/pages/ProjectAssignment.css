@@ -1,0 +1,271 @@
+/* Main container */
+.project-assignment-container {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Header section */
+  .project-assignment-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .project-assignment-header h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  .project-assignment-header .instructions {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Main layout */
+  .project-assignment-layout {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  /* Sidebar */
+  .assignment-sidebar {
+    flex: 0 0 320px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+  }
+  
+  .sidebar-header h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.2rem;
+  }
+  
+  /* Search input */
+  .search-box {
+    margin-bottom: 1rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  /* Filter section */
+  .filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .filter-group label {
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  .filter-select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  /* Intern list in sidebar */
+  .intern-list-sidebar {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  
+  /* Draggable intern card */
+  .draggable-intern-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    background-color: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    cursor: grab;
+    transition: all 0.2s ease;
+  }
+  
+  .draggable-intern-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .draggable-intern-card.dragging {
+    opacity: 0.6;
+    transform: scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Intern avatar */
+  .intern-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  
+  /* Intern details */
+  .intern-details {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .intern-details h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .intern-role-sidebar {
+    margin: 0.2rem 0;
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  /* Tech tags */
+  .tech-tags-sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+  
+  .tech-tag-sidebar {
+    background-color: #e9f5fe;
+    color: #2c7be5;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+  
+  .tech-count {
+    font-size: 0.7rem;
+    color: #666;
+    padding: 0.2rem 0.5rem;
+  }
+  
+  /* No interns message */
+  .no-interns-message {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  /* Projects main content */
+  .projects-main-content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  /* Loading spinner */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+  }
+  
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #3498db;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Error container */
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .retry-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+  }
+  
+  .retry-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 992px) {
+    .project-assignment-layout {
+      flex-direction: column;
+    }
+    
+    .assignment-sidebar {
+      flex: 0 0 auto;
+      width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+      max-height: 500px;
+    }
+  }
