@@ -18,7 +18,15 @@ const ProjectAssignment = () => {
       try {
         setLoading(true);
         const data = await fetchInterns();
-        setInterns(data);
+        
+        // Add initials property if not already present
+        const internsWithInitials = data.map(intern => ({
+          ...intern,
+          id: intern._id || intern.id, // Ensure we have a consistent id property
+          initials: intern.initials || getInitials(intern.name)
+        }));
+        
+        setInterns(internsWithInitials);
         setLoading(false);
       } catch (err) {
         setError('Failed to fetch interns data');
@@ -30,6 +38,17 @@ const ProjectAssignment = () => {
     loadInterns();
   }, []);
   
+  // Helper function to get initials from name
+  const getInitials = (name) => {
+    if (!name) return 'XX';
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .toUpperCase()
+      .substring(0, 2);
+  };
+  
   // Get unique tech stacks and roles for filters
   const uniqueTechs = [...new Set(
     interns.flatMap(intern => 
@@ -39,27 +58,15 @@ const ProjectAssignment = () => {
   
   const uniqueRoles = [...new Set(
     interns.map(intern => intern.role)
-  )].sort();
+  )].filter(Boolean).sort();
   
   // Filter interns based on search and filters
   const filteredInterns = interns.filter(intern => {
-    const nameMatch = intern.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const nameMatch = intern.name?.toLowerCase().includes(searchTerm.toLowerCase());
     const techMatch = !techFilter || (intern.techStack && intern.techStack.includes(techFilter));
     const roleMatch = !roleFilter || intern.role === roleFilter;
     return nameMatch && techMatch && roleMatch;
   });
-
-  // Handle drag start for an intern
-  const handleDragStart = (e, internId) => {
-    e.dataTransfer.setData('intern', internId);
-    // Add a dragging class to visualize the dragged item
-    e.currentTarget.classList.add('dragging');
-  };
-  
-  // Handle drag end
-  const handleDragEnd = (e) => {
-    e.currentTarget.classList.remove('dragging');
-  };
 
   if (loading) {
     return (
@@ -89,7 +96,7 @@ const ProjectAssignment = () => {
       <div className="project-assignment-header">
         <h1>Project Assignment</h1>
         <p className="instructions">
-          Drag and drop interns onto projects to assign them based on their skills and tech stack preferences.
+          Use the dropdown in each project card to assign interns based on their skills and tech stack preferences.
         </p>
       </div>
       
@@ -142,11 +149,8 @@ const ProjectAssignment = () => {
             {filteredInterns.length > 0 ? (
               filteredInterns.map(intern => (
                 <div 
-                  key={intern.id} 
-                  className="draggable-intern-card"
-                  draggable={true}
-                  onDragStart={(e) => handleDragStart(e, intern.id)}
-                  onDragEnd={handleDragEnd}
+                  key={intern.id || intern._id} 
+                  className="intern-card"
                 >
                   <div className="intern-avatar">{intern.initials}</div>
                   <div className="intern-details">
@@ -154,7 +158,7 @@ const ProjectAssignment = () => {
                     <p className="intern-role-sidebar">{intern.role}</p>
                     <div className="tech-tags-sidebar">
                       {intern.techStack && intern.techStack.slice(0, 3).map((tech, index) => (
-                        <span key={index} className="tech-tag-sidebar">{tech}</span>
+                        <span key={`${intern.id || intern._id}-tech-${index}`} className="tech-tag-sidebar">{tech}</span>
                       ))}
                       {intern.techStack && intern.techStack.length > 3 && (
                         <span className="tech-count">+{intern.techStack.length - 3}</span>

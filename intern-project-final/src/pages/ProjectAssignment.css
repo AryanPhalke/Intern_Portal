@@ -1,7 +1,7 @@
 /* Main container */
 .project-assignment-container {
     padding: 1rem;
-    background-color: #f8f9fa;
+    background-color: white;
     border-radius: 8px;
     width: 100%;
     min-height: 100vh;
@@ -45,6 +45,7 @@
   }
   
   .sidebar-header {
+    width: 250px;
     padding: 1rem;
     border-bottom: 1px solid #e5e5e5;
   }
@@ -269,3 +270,4 @@
       max-height: 500px;
     }
   }
+  

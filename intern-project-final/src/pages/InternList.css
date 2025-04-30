@@ -7,7 +7,7 @@
 
 .directory-header {
   margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid #e5e7eb;
   text-align: center;
 }
@@ -16,17 +16,45 @@
   font-size: 2rem;
   font-weight: 700;
   color: #2563eb;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
 }
 
-
-
-/* New styles for directory actions */
+/* Directory actions - main navigation buttons */
 .directory-actions {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.view-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+}
+
+.view-button:hover {
+  background-color: #e5e7eb;
+}
+
+.view-button.active {
+  background-color: #2563eb;
+  color: white;
+  border-color: #2563eb;
+}
+
+/* Directory subactions - view toggle and add intern buttons */
+.directory-subactions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .view-toggle-button,
@@ -36,6 +64,7 @@
   font-weight: 600;
   transition: all 0.2s;
   cursor: pointer;
+  min-width: 140px;
 }
 
 .view-toggle-button {
@@ -125,8 +154,18 @@
     grid-template-columns: 1fr; /* Single column on mobile */
   }
   
-  .directory-actions {
+  .directory-actions,
+  .directory-subactions {
     flex-direction: column;
     gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .view-button,
+  .view-toggle-button,
+  .toggle-form-button {
+    width: 100%;
+    max-width: 250px;
   }
 }

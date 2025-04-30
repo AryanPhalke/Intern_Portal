@@ -1,119 +1,124 @@
-// Simulated API service
-import { MOCK_PROJECTS } from '../mockProjects.js';
+// services/api.js
+const API_BASE_URL = '/api';
 
-// Simulated delay to mimic network request
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-// Mock data storage key
-const INTERNS_STORAGE_KEY = 'mock_interns_data';
-const PROJECT_ASSIGNMENTS_KEY = 'project_assignments_data';
-
-// Initialize mock data in browser storage if not present
-const initializeMockData = async () => {
-  if (!localStorage.getItem(INTERNS_STORAGE_KEY)) {
-    try {
-      const mockData = await import('../mockData.json');
-      localStorage.setItem(INTERNS_STORAGE_KEY, JSON.stringify(mockData.default));
-    } catch (error) {
-      console.error('Error initializing mock data:', error);
-      throw error;
-    }
+// Utility function to handle API response and errors
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(errorBody.error || `API error: ${response.status}`);
   }
+  return response.json();
 };
 
-// Function to fetch all interns
+// Fetch all interns
 export const fetchInterns = async () => {
   try {
-    // Simulate network delay
-    await delay(800);
+    const response = await fetch(`${API_BASE_URL}/interns`);
+    const data = await handleResponse(response);
     
-    // Initialize mock data if needed
-    await initializeMockData();
-    
-    // Get data from storage
-    const internsData = localStorage.getItem(INTERNS_STORAGE_KEY);
-    return JSON.parse(internsData);
+    // Normalize data structure - ensure each intern has an id property
+    return data.map(intern => ({
+      ...intern,
+      id: intern._id || intern.id // MongoDB uses _id, but our app uses id
+    }));
   } catch (error) {
     console.error('Error fetching interns:', error);
     throw error;
   }
 };
 
-
-
-// Function to fetch projects
-export const getProjects = async () => {
+// Fetch all projects
+export const fetchProjects = async () => {
   try {
-    await delay(800);
-    return MOCK_PROJECTS;
+    const response = await fetch(`${API_BASE_URL}/projects`);
+    const data = await handleResponse(response);
+    
+    // Normalize data structure
+    return data.map(project => ({
+      ...project,
+      id: project._id || project.id
+    }));
   } catch (error) {
     console.error('Error fetching projects:', error);
     throw error;
   }
 };
 
-// Function to add a new intern
+// Add a new intern
 export const addIntern = async (internData) => {
   try {
-    // Simulate network delay for POST request
-    await delay(1000);
+    const response = await fetch(`${API_BASE_URL}/interns`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(internData)
+    });
     
-    // Initialize mock data if needed
-    await initializeMockData();
-    
-    // Get current interns
-    const internsData = localStorage.getItem(INTERNS_STORAGE_KEY);
-    const interns = JSON.parse(internsData);
-    
-    // Add to interns array
-    const updatedInterns = [...interns, newIntern];
-    
-    // Update storage
-    localStorage.setItem(INTERNS_STORAGE_KEY, JSON.stringify(updatedInterns));
-    
-    // Optional: Simulate updating mockData.json by logging
-    console.log('Mock update: Saving new intern to mockData.json', newIntern);
-    
-    return newIntern;
+    const data = await handleResponse(response);
+    return {
+      ...data,
+      id: data._id || data.id
+    };
   } catch (error) {
     console.error('Error adding intern:', error);
     throw error;
   }
 };
 
-// Function to save project assignments
-export const saveProjectAssignments = async (assignments) => {
+// Add a new project
+export const addProject = async (projectData) => {
   try {
-    // Simulate network delay
-    await delay(500);
+    const response = await fetch(`${API_BASE_URL}/projects`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(projectData)
+    });
     
-    // Save to storage
-    localStorage.setItem(PROJECT_ASSIGNMENTS_KEY, JSON.stringify(assignments));
+    const data = await handleResponse(response);
+    return {
+      ...data,
+      id: data._id || data.id
+    };
+  } catch (error) {
+    console.error('Error adding project:', error);
+    throw error;
+  }
+};
+
+// Get assignments for a project
+export const getProjectAssignments = async (projectId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/assignments/project/${projectId}`);
+    return handleResponse(response);
+  } catch (error) {
+    console.error(`Error fetching assignments for project ${projectId}:`, error);
+    throw error;
+  }
+};
+
+// Save project assignments
+export const saveProjectAssignments = async (projectId, internIds) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/assignments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ projectId, internIds })
+    });
     
-    return { success: true };
+    return handleResponse(response);
   } catch (error) {
     console.error('Error saving project assignments:', error);
     throw error;
   }
 };
 
-// Function to get project assignments
-export const getProjectAssignments = async () => {
-  try {
-    await delay(300);
-    
-    const storedAssignments = localStorage.getItem(PROJECT_ASSIGNMENTS_KEY);
-    if (storedAssignments) {
-      return JSON.parse(storedAssignments);
-    }
-    
-    // Return empty object if no assignments yet
-    return {};
-  } catch (error) {
-    console.error('Error fetching project assignments:', error);
-    throw error;
-  }
+// Remove intern assignment
+export const removeInternAssignment = async (projectId, internId) => {
+  // First, get current assignments
+  const currentAssignment = await getProjectAssignments(projectId);
+  
+  // Remove the intern from the list
+  const updatedInternIds = currentAssignment.internIds.filter(id => id !== internId);
+  
+  // Save updated assignments
+  return saveProjectAssignments(projectId, updatedInternIds);
 };
-
-// Initialize mock data when the module is imported
-initializeMockData().catch(error => console.error('Failed to initialize mock data:', error));

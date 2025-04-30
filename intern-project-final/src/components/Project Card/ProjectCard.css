@@ -1,177 +1,301 @@
 .project-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: all 0.3s ease;
-    border: 2px dashed transparent;
-  }
-  
-  .project-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  .project-card.drag-over {
-    border: 2px dashed #3498db;
-    background-color: rgba(52, 152, 219, 0.05);
-  }
-  
-  .project-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .project-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
-  }
-  
-  .status-badge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: #fff;
-  }
-  
-  .status-badge.active {
-    background-color: #2ecc71;
-  }
-  
-  .status-badge.pending {
-    background-color: #f39c12;
-  }
-  
-  .status-badge.completed {
-    background-color: #95a5a6;
-  }
-  
-  .project-description {
-    color: #7f8c8d;
-    margin-bottom: 15px;
-    line-height: 1.5;
-  }
-  
-  .project-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .tech-requirements, .role-requirements {
-    flex: 1;
-    min-width: 200px;
-  }
-  
-  .tech-requirements h3, .role-requirements h3, .assigned-interns h3 {
-    font-size: 0.9rem;
-    color: #34495e;
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-  
-  .tech-tags, .role-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  
-  .tech-tag {
-    background-color: #e6f7ff;
-    color: #1890ff;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  .role-tag {
-    background-color: #fff0f6;
-    color: #eb2f96;
-    border-radius: 4px;
-    padding: 4px 8px;
-    font-size: 0.8rem;
-    font-weight: 500;
-  }
-  
-  .assigned-interns {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #f0f0f0;
-  }
-  
-  .intern-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0 0 0;
-  }
-  
-  .assigned-intern {
-    display: flex;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #f5f5f5;
-  }
-  
-  .assigned-intern:last-child {
-    border-bottom: none;
-  }
-  
-  .intern-avatar {
-    width: 30px;
-    height: 30px;
-    background-color: #3498db;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.8rem;
-    margin-right: 10px;
-  }
-  
-  .intern-info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .intern-name {
-    font-weight: 500;
-    color: #2c3e50;
-  }
-  
-  .intern-role {
-    font-size: 0.8rem;
-    color: #7f8c8d;
-  }
-  
-  .no-interns {
-    color: #95a5a6;
-    font-style: italic;
-    font-size: 0.9rem;
-    padding: 10px 0;
-  }
-  
-  .project-footer {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 15px;
-    margin-top: 15px;
-    border-top: 1px solid #f0f0f0;
-    color: #7f8c8d;
-    font-size: 0.8rem;
-  }
-  
-  .capacity {
-    font-weight: 600;
-  }
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.project-card.drag-over {
+  box-shadow: 0 0 0 2px #6200ea, 0 8px 16px rgba(98, 0, 234, 0.2);
+  transform: translateY(-4px);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.project-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.project-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.active {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.pending {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.status-badge.completed {
+  background-color: #e0f2f1;
+  color: #00796b;
+}
+
+.project-description {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.project-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tech-requirements h3,
+.role-requirements h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tech-tags,
+.role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tech-tag {
+  background-color: #e0f7fa;
+  color: #006064;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.role-tag {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Intern Assignment Section */
+.intern-assignment-section {
+  margin-bottom: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.intern-assignment-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.drop-zone-indicator {
+  background-color: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.drag-over .drop-zone-indicator {
+  background-color: rgba(98, 0, 234, 0.05);
+  border-color: #6200ea;
+}
+
+.drop-zone-indicator span {
+  font-size: 14px;
+  color: #757575;
+}
+
+.drag-over .drop-zone-indicator span {
+  color: #6200ea;
+  font-weight: 500;
+}
+
+.intern-assignment-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.intern-dropdown {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.assign-button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.assign-button:hover {
+  background-color: #5000d6;
+}
+
+.assign-button:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.capacity-message {
+  color: #f44336;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 8px 0;
+}
+
+/* Assigned Interns Section */
+.assigned-interns {
+  margin-bottom: 16px;
+}
+
+.assigned-interns h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.intern-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assigned-intern {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 12px;
+  position: relative;
+}
+
+.intern-info {
+  flex: 1;
+  margin-left: 12px;
+}
+
+.intern-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.intern-role {
+  display: block;
+  font-size: 12px;
+  color: #757575;
+  margin-bottom: 6px;
+}
+
+.intern-match {
+  display: flex;
+  gap: 8px;
+}
+
+.match-indicator {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.match-indicator.good {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.match-indicator.medium {
+  background-color: #fff8e1;
+  color: #f57f17;
+}
+
+.match-indicator.poor {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.remove-intern-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #9e9e9e;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.remove-intern-btn:hover {
+  background-color: #e57373;
+  color: white;
+}
+
+.no-interns {
+  color: #757575;
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* Project Footer */
+.project-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  color: #757575;
+  font-size: 12px;
+}

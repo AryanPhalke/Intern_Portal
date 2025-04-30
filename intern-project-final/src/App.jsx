@@ -10,7 +10,7 @@ function App() {
     <div className="container">
       <header className="py-6 mb-8 border-b border-gray-200">
         <h1 className="text-3xl font-bold text-center">Intern Management System</h1>
-        <nav className="mt-4 flex justify-center space-x-6">
+        <nav className="intern">
           <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
             Intern Directory
           </NavLink>
